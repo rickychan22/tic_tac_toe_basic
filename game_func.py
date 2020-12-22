@@ -53,10 +53,37 @@ def player_choice(board):
 		position = int(input('Where would you like to place you marker 1-9?'))
 	return position
 
-#function to check if there is a winner
-def win_checker():
-	pass
-
+#place marker on the board
 def place_marker(board, marker, position):
 	board[position] = marker
+
+#check if board is full ie if full and no winner then it is a tie
+def check_full_board(board):
+	for i in range (0,10):
+		if check_space(board, i):
+			return False
+	return True
+
+
+#function to check if there is a winner
+def win_checker(board, mark):
+	return ((board[7] == mark and board[8] == mark and board[9] == mark) or # across the top
+    (board[4] == mark and board[5] == mark and board[6] == mark) or # across the middle
+    (board[1] == mark and board[2] == mark and board[3] == mark) or # across the bottom
+    (board[7] == mark and board[4] == mark and board[1] == mark) or # down the middle
+    (board[8] == mark and board[5] == mark and board[2] == mark) or # down the middle
+    (board[9] == mark and board[6] == mark and board[3] == mark) or # down the right side
+    (board[7] == mark and board[5] == mark and board[3] == mark) or # diagonal
+    (board[9] == mark and board[5] == mark and board[1] == mark)) # diagonal
+
+#break while loop if players do not want to continue 
+def replay():
+	play_again = input('Would you like to play again, Yes or No?').upper()
+
+	if player_again == 'YES':
+		return True
+	else:
+		return False
+
+
 

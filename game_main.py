@@ -36,8 +36,21 @@ while True:
 			position = game_func.player_choice(board_new)
 			game_func.place_marker(board_new,player1_marker,position)
 			print(turn)
-			turn = 'Player 2'
-
+			
+			#check if there is a win
+			if game_func.win_checker(board_new, player1_marker):
+				#congrats
+				board(board_new)
+				print('PLAYER 1 WINS')
+				break
+			else:
+				if game_func.check_full_board(board_new):
+					#tie
+					board(board_new)
+					print('THE GAME HAS ENDED IN A TIE')
+					break
+				else:
+					turn = 'Player 2'
 		
 		#player 2 turn
 		else:
@@ -45,3 +58,21 @@ while True:
 			position = game_func.player_choice(board_new)
 			game_func.place_marker(board_new,player2_marker,position)
 			turn = 'Player 1'
+
+			#check if there is a win
+			if game_func.win_checker(board_new, player2_marker):
+				#congrats
+				board(board_new)
+				print('PLAYER 2 WINS')
+				break
+			else:
+				if game_func.check_full_board(board_new):
+					#tie
+					board(board_new)
+					print('THE GAME HAS ENDED IN A TIE')
+					break
+				else:
+					turn = 'Player 1'
+
+	if not game_func.replay():
+		break
